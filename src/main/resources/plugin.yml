@@ -1,0 +1,7 @@
+name: HeadBackpacks
+version: '${project.version}'
+main: com.borrageiros.headbackpacks.HeadBackpacks
+api-version: '1.21'
+commands:
+  backpack:
+    description: Backpack Command Handler

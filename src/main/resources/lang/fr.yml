@@ -1,0 +1,13 @@
+dont_have_permission: '<red>Vous n''avez pas la permission! (%permission%)'
+backpack_command_usage: '<yellow>Utilise: /backpack <give/list/texture>.'
+give_command_usage: '<yellow>Utilise: /backpack give <backpack_id>'
+give_command_success: '<green>Sac à dos %backpack_name% reçu!'
+backpack_not_found: '<red>Sac à dos non trouvé! (%backpack%)'
+list_command_message: '<green>Liste des sacs à dos:'
+list_command_items_message: '<green> - %backpack_name% (%backpack%)'
+texture_command_usage: '<yellow>Utilise: /backpack texture <url>'
+texture_command_success: '<green>Texture du sac à dos mise à jour avec succès!'
+texture_command_no_backpack: '<red>Vous devez tenir un sac à dos dans votre main principale!'
+texture_command_stack_too_large: '<red>Vous ne pouvez personnaliser qu''un seul sac à dos à la fois!'
+texture_command_invalid_url: '<red>URL de texture invalide! Doit être une URL de textures Minecraft.'
+

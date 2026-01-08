@@ -1,0 +1,13 @@
+dont_have_permission: '<red>У вас нет разрешения! (%permission%)'
+backpack_command_usage: '<yellow>Используйте: /backpack <give/list/texture>.'
+give_command_usage: '<yellow>Используйте: /backpack give <backpack_id>'
+give_command_success: '<green>Рюкзак %backpack_name% получен!'
+backpack_not_found: '<red>Рюкзак не найден! (%backpack%)'
+list_command_message: '<green>Список рюкзаков:'
+list_command_items_message: '<green> - %backpack_name% (%backpack%)'
+texture_command_usage: '<yellow>Используйте: /backpack texture <url>'
+texture_command_success: '<green>Текстура рюкзака успешно обновлена!'
+texture_command_no_backpack: '<red>Вы должны держать рюкзак в основной руке!'
+texture_command_stack_too_large: '<red>Вы можете настроить только один рюкзак за раз!'
+texture_command_invalid_url: '<red>Неверный URL текстуры! Должен быть URL текстур Minecraft.'
+

@@ -1,0 +1,78 @@
+#To decorate the texts you need to use AdventureAPI MiniMessages! (Wiki: https://docs.advntr.dev/minimessage/index.html)
+#To define the materials for crafting, you must follow the updated item pattern! Example: 'LEATHER' 'STONE' 'DIAMOND'.
+#To define a backpack when creating, use the special character '$' and in the list of 'items' pass the ID of that backpack as a parameter!
+
+#List of Placeholders:
+# - %permission% = command permission
+# - %backpack% = backpack ID param
+# - %backpack_name% = backpack name
+# - %backpack_rows% = backpack rows number
+# - %backpack_slots% = backpack slots number
+
+#Available languages: en, es, pt, de, fr, zh, ru
+Language: 'en'
+
+Permission: 'headbackpacks.use' #If this field is not filled in, the permission will be "headbackpacks.use"
+GivePermission: 'headbackpacks.give' #If this field is not filled in, the permission will be "headbackpacks.give"
+TexturePermission: 'headbackpacks.texture' #If this field is not filled in, the permission will be "headbackpacks.texture"
+
+AllowPlaceBackpacks: true #If true, and the user is sneaking, backpacks can be placed in the world and will keep their contents when broken
+AllowWearBackpacks: true #If true, players can wear backpacks on their chest as armor
+
+DefaultTexture: 'https://textures.minecraft.net/texture/bdfcee8306e0434a747710e2bdc2558c5a222e9b693477909f10d6cc220f6764'
+
+Backpacks:
+  small_backpack: #ID of Backpack (use sneak_case in the backpack identifier!)
+    name: 'Small Backpack' #Name of Item
+    lore: #Lore of Item
+      - ''
+      - '<grey>A compact backpack'
+      - '<grey>Rows: <bold><gold>%backpack_rows%'
+      - '<grey>Slots: <bold><gold>%backpack_slots%'
+      - ''
+    rows: 2 #Number of Rows
+    #texture: 'https://textures.minecraft.net/texture/...' #Optional: Custom texture URL (uses DefaultTexture if not set)
+    # example web to find textures: https://minecraft-heads.com/
+    craft: #Craft Struct
+      shape: #Shape of Recipe
+        - 'LLL'
+        - 'L L'
+        - 'LLL'
+      items: #Items in Recipe
+        L: 'LEATHER'
+
+  backpack:
+    name: 'Backpack'
+    lore:
+      - ''
+      - '<grey>A medium-sized backpack'
+      - '<grey>Rows: <bold><gold>%backpack_rows%'
+      - '<grey>Slots: <bold><gold>%backpack_slots%'
+      - ''
+    rows: 4
+    craft:
+      shape:
+        - 'III'
+        - 'I$I'
+        - 'III'
+      items:
+        I: 'IRON_INGOT'
+        $: 'small_backpack'
+
+  large_backpack:
+    name: 'Large Backpack'
+    lore:
+      - ''
+      - '<grey>A spacious backpack'
+      - '<grey>Rows: <bold><gold>%backpack_rows%'
+      - '<grey>Slots: <bold><gold>%backpack_slots%'
+      # - ''
+    rows: 6
+    craft:
+      shape:
+        - 'DDD'
+        - 'D$D'
+        - 'DDD'
+      items:
+        D: 'DIAMOND'
+        $: 'backpack'

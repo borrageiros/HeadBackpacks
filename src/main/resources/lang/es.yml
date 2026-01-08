@@ -1,0 +1,13 @@
+dont_have_permission: '<red>¡No tienes permiso! (%permission%)'
+backpack_command_usage: '<yellow>Usa: /backpack <give/list/texture>.'
+give_command_usage: '<yellow>Usa: /backpack give <backpack_id>'
+give_command_success: '<green>¡Mochila %backpack_name% recibida!'
+backpack_not_found: '<red>¡Mochila no encontrada! (%backpack%)'
+list_command_message: '<green>Lista de Mochilas:'
+list_command_items_message: '<green> - %backpack_name% (%backpack%)'
+texture_command_usage: '<yellow>Usa: /backpack texture <url>'
+texture_command_success: '<green>¡Textura de mochila actualizada correctamente!'
+texture_command_no_backpack: '<red>¡Debes tener una mochila en tu mano principal!'
+texture_command_stack_too_large: '<red>¡Solo puedes personalizar una mochila a la vez!'
+texture_command_invalid_url: '<red>¡URL de textura inválida! Debe ser una URL de texturas de Minecraft.'
+

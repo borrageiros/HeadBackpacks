@@ -1,0 +1,13 @@
+dont_have_permission: '<red>Du hast keine Berechtigung! (%permission%)'
+backpack_command_usage: '<yellow>Benutze: /backpack <give/list/texture>.'
+give_command_usage: '<yellow>Benutze: /backpack give <backpack_id>'
+give_command_success: '<green>Rucksack %backpack_name% erhalten!'
+backpack_not_found: '<red>Rucksack nicht gefunden! (%backpack%)'
+list_command_message: '<green>Liste der Rucksäcke:'
+list_command_items_message: '<green> - %backpack_name% (%backpack%)'
+texture_command_usage: '<yellow>Benutze: /backpack texture <url>'
+texture_command_success: '<green>Rucksack-Textur erfolgreich aktualisiert!'
+texture_command_no_backpack: '<red>Du musst einen Rucksack in der Haupthand halten!'
+texture_command_stack_too_large: '<red>Du kannst nur einen Rucksack gleichzeitig anpassen!'
+texture_command_invalid_url: '<red>Ungültige Textur-URL! Muss eine Minecraft-Texturen-URL sein.'
+

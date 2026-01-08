@@ -1,0 +1,13 @@
+dont_have_permission: '<red>你没有权限！(%permission%)'
+backpack_command_usage: '<yellow>用法：/backpack <give/list/texture>'
+give_command_usage: '<yellow>用法：/backpack give <背包ID>'
+give_command_success: '<green>已收到背包 %backpack_name%！'
+backpack_not_found: '<red>未找到背包！(%backpack%)'
+list_command_message: '<green>背包列表：'
+list_command_items_message: '<green> - %backpack_name% (%backpack%)'
+texture_command_usage: '<yellow>用法：/backpack texture <URL>'
+texture_command_success: '<green>背包材质更新成功！'
+texture_command_no_backpack: '<red>你必须在主手拿着背包！'
+texture_command_stack_too_large: '<red>一次只能自定义一个背包！'
+texture_command_invalid_url: '<red>无效的材质URL！必须是Minecraft材质URL。'
+
