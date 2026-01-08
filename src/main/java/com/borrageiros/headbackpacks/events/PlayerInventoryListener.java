@@ -132,6 +132,14 @@ public class PlayerInventoryListener implements Listener {
 
             player.openInventory(new BackpackGUI(displayName, backpackRows * 9, clickedItem, inventoryContent).getInventory());
         }
+
+        // Cancel any attempt to move the backpack if it is open
+        if (currentIsBackpack || cursorIsBackpack) {
+            if (isBackpackInventory(event.getClickedInventory()) || isBackpackInventory(event.getInventory())) {
+                event.setCancelled(true);
+                return;
+            }
+        }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
