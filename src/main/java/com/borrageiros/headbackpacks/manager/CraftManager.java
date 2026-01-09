@@ -146,17 +146,18 @@ public class CraftManager {
     }
 
     public RecipeEntity isCustomCraft(ItemStack[] craftMatrix) {
-        for (int i = 0; i < craftMatrix.length; i++) {
-            if (craftMatrix[i] != null) {
-                if (craftMatrix[i].getType().equals(Material.PLAYER_HEAD)) {
-                    String backpackID = PersistentDataUtils.getStringData(craftMatrix[i], "type");
-                    craftMatrix[i] = getResultByBackpackID(backpackID);
+        ItemStack[] matrixCopy = Arrays.copyOf(craftMatrix, craftMatrix.length);
+        for (int i = 0; i < matrixCopy.length; i++) {
+            if (matrixCopy[i] != null) {
+                if (matrixCopy[i].getType().equals(Material.PLAYER_HEAD)) {
+                    String backpackID = PersistentDataUtils.getStringData(matrixCopy[i], "type");
+                    matrixCopy[i] = getResultByBackpackID(backpackID);
                 }
             }
         }
 
         for (RecipeEntity recipe : this.backpackRecipes) {
-            if (Arrays.equals(recipe.shape(), craftMatrix)) {
+            if (Arrays.equals(recipe.shape(), matrixCopy)) {
                 return recipe;
             }
         }

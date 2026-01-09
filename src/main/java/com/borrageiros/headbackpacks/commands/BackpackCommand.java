@@ -27,24 +27,24 @@ public class BackpackCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player player)) {
             HeadBackpacks.getInstance().getLogger().warning("Only players can execute this Command!");
-            return false;
+            return true;
         }
 
         if (!player.hasPermission(HeadBackpacks.getInstance().getPluginPermission())) {
             player.sendMessage(HeadBackpacks.getInstance().getMessagesManager().createMessage("dont_have_permission", new MessagePlaceholder("")));
-            return false;
+            return true;
         }
 
         if (args.length < 1) {
             player.sendMessage(HeadBackpacks.getInstance().getMessagesManager().createMessage("backpack_command_usage", new MessagePlaceholder("")));
-            return false;
+            return true;
         }
 
         switch (args[0].toLowerCase()) {
             case "give" -> {
                 if (!player.hasPermission(HeadBackpacks.getInstance().getGivePermission())) {
                     player.sendMessage(HeadBackpacks.getInstance().getMessagesManager().createMessage("dont_have_permission", new MessagePlaceholder("")));
-                    return false;
+                    return true;
                 }
                 new GiveBackpackSubCommand().onCommand(player, args);
             }
@@ -52,12 +52,12 @@ public class BackpackCommand implements CommandExecutor {
             case "texture" -> {
                 if (!player.hasPermission(HeadBackpacks.getInstance().getTexturePermission())) {
                     player.sendMessage(HeadBackpacks.getInstance().getMessagesManager().createMessage("dont_have_permission", new MessagePlaceholder("")));
-                    return false;
+                    return true;
                 }
                 new TextureBackpackSubCommand().onCommand(player, args);
             }
             default -> player.sendMessage(HeadBackpacks.getInstance().getMessagesManager().createMessage("backpack_command_usage", new MessagePlaceholder("")));
         }
-        return false;
+        return true;
     }
 }

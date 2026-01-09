@@ -28,6 +28,11 @@ public class PlayerInteractListener implements Listener {
         this.plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
+    private boolean isPlayerHeadWithContent(org.bukkit.inventory.ItemStack item) {
+        if (item == null) return false;
+        return item.getType() == Material.PLAYER_HEAD && PersistentDataUtils.hasData(item, "content");
+    }
+
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
@@ -64,9 +69,7 @@ public class PlayerInteractListener implements Listener {
             }
         }
 
-        if (event.getItem() == null) return;
-        if (!event.getPlayer().getInventory().getItemInMainHand().getType().equals(Material.PLAYER_HEAD)) return;
-        if (!PersistentDataUtils.hasData(event.getItem(), "content")) return;
+        if (!isPlayerHeadWithContent(event.getItem())) return;
 
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
             Block clickedBlock = event.getClickedBlock();

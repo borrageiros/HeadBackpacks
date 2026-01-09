@@ -46,6 +46,14 @@ public class PlayerInventoryListener implements Listener {
         return inventory.getHolder() instanceof BackpackGUI || inventory.getHolder() instanceof PlacedBackpackGUI;
     }
 
+    private boolean isHelmetSlot(int slot) {
+        return slot == HELMET_SLOT;
+    }
+
+    private boolean isChestplateSlot(int slot) {
+        return slot == CHESTPLATE_SLOT;
+    }
+
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerInventoryInteract(InventoryClickEvent event) {
         if (event.getClickedInventory() == null) return;
@@ -56,7 +64,7 @@ public class PlayerInventoryListener implements Listener {
         boolean cursorIsBackpack = isBackpack(cursorItem);
         boolean currentIsBackpack = isBackpack(currentItem);
 
-        if (event.getSlot() == HELMET_SLOT && cursorIsBackpack) {
+        if (isHelmetSlot(event.getSlot()) && cursorIsBackpack) {
             event.setCancelled(true);
             return;
         }
@@ -85,7 +93,7 @@ public class PlayerInventoryListener implements Listener {
             }
         }
 
-        if (event.getSlot() == CHESTPLATE_SLOT && cursorIsBackpack) {
+        if (isChestplateSlot(event.getSlot()) && cursorIsBackpack) {
             event.setCancelled(true);
             ItemStack chestplateItem = player.getInventory().getChestplate();
             player.getInventory().setChestplate(cursorItem);
@@ -153,13 +161,13 @@ public class PlayerInventoryListener implements Listener {
         boolean currentIsBackpack = isBackpack(currentItem);
 
         // Prevent placing a backpack in the helmet slot
-        if (event.getSlot() == HELMET_SLOT && cursorIsBackpack) {
+        if (isHelmetSlot(event.getSlot()) && cursorIsBackpack) {
             event.setCancelled(true);
             return;
         }
 
         // Allow placing a backpack in the chestplate slot (swap if necessary)
-        if (event.getSlot() == CHESTPLATE_SLOT && cursorIsBackpack) {
+        if (isChestplateSlot(event.getSlot()) && cursorIsBackpack) {
             event.setCancelled(true);
             ItemStack chestplateItem = player.getInventory().getChestplate();
             player.getInventory().setChestplate(cursorItem);
@@ -183,7 +191,7 @@ public class PlayerInventoryListener implements Listener {
 
         if (event.isShiftClick() && currentIsBackpack) {
             // Prevent placing a backpack in the helmet slot
-            if (event.getSlot() == HELMET_SLOT) {
+            if (isHelmetSlot(event.getSlot())) {
                 event.setCancelled(true);
                 return;
             }

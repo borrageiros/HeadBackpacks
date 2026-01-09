@@ -27,12 +27,13 @@ public class SerializationUtils {
             return Base64Coder.encodeLines(outputStream.toByteArray());
         } catch (Exception exception) {
             exception.printStackTrace(System.err);
-            return null;
+            return "";
         }
     }
 
     public static Inventory inventoryFromBase64(String data) {
         try {
+            if (data == null || data.isEmpty()) return Bukkit.createInventory(null, 9);
             ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
             BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
             Inventory inventory = Bukkit.createInventory(null, dataInput.readInt());

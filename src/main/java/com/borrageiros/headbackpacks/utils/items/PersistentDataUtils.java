@@ -13,6 +13,7 @@ public class PersistentDataUtils {
         if (meta == null) {
             throw new IllegalArgumentException("ItemMeta is null. Cannot add persistent data to this item.");
         }
+        if (data == null) data = "";
         meta.getPersistentDataContainer().set(buildKey(key), PersistentDataType.STRING, data);
         itemStack.setItemMeta(meta);
     }
@@ -37,17 +38,19 @@ public class PersistentDataUtils {
     public static String getStringData(ItemStack itemStack, String key) {
         ItemMeta meta = itemStack.getItemMeta();
         if (meta == null) {
-            return null;
+            return "";
         }
-        return meta.getPersistentDataContainer().get(buildKey(key), PersistentDataType.STRING);
+        String value = meta.getPersistentDataContainer().get(buildKey(key), PersistentDataType.STRING);
+        return value == null ? "" : value;
     }
 
-    public static Integer getIntData(ItemStack itemStack, String key) {
+    public static int getIntData(ItemStack itemStack, String key) {
         ItemMeta meta = itemStack.getItemMeta();
         if (meta == null) {
-            return null;
+            return 1;
         }
-        return meta.getPersistentDataContainer().get(buildKey(key), PersistentDataType.INTEGER);
+        Integer value = meta.getPersistentDataContainer().get(buildKey(key), PersistentDataType.INTEGER);
+        return value == null ? 1 : value;
     }
 
     public static NamespacedKey buildKey(String key) {
