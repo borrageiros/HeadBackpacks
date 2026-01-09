@@ -1,5 +1,7 @@
 <p align="center">
-  <img src="README/logo.png" alt="HeadBackpacks Logo" width="200">
+  <img src="README/back_example.png" alt="Backpack Back View" height="100">
+  <img src="README/logo.png" alt="HeadBackpacks Logo" height="150">
+  <img src="README/front_exampe.png" alt="Backpack Front View" height="100">
 </p>
 
 <h1 align="center">🎒 HeadBackpacks</h1>
