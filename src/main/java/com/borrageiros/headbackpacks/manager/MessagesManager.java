@@ -48,8 +48,8 @@ public class MessagesManager {
             langFile = new File(plugin.getDataFolder(), "lang/en.yml");
             if (!langFile.exists()) {
                 this.plugin.getLogger().severe("No language files found!");
-                this.plugin.getServer().getPluginManager().disablePlugin(this.plugin);
-                return;
+            this.plugin.getServer().getPluginManager().disablePlugin(this.plugin);
+            return;
             }
             langConfig = YamlConfiguration.loadConfiguration(langFile);
         }

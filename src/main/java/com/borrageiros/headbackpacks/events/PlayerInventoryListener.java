@@ -20,6 +20,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -35,6 +37,24 @@ public class PlayerInventoryListener implements Listener {
     public PlayerInventoryListener(Plugin plugin) {
         this.plugin = plugin;
         this.plugin.getServer().getPluginManager().registerEvents(this, plugin);
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        if (event.getPlayer() == null) return;
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            Player player = event.getPlayer();
+            ItemStack chestplate = player.getInventory().getChestplate();
+            if (isBackpack(chestplate)) {
+                HeadBackpacks.getInstance().getVisualManager().spawnBackpackFor(player, chestplate);
+            }
+        }, 5L);
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        if (event.getPlayer() == null) return;
+        HeadBackpacks.getInstance().getVisualManager().removeBackpack(event.getPlayer());
     }
 
     private boolean isBackpack(ItemStack item) {
@@ -83,6 +103,11 @@ public class PlayerInventoryListener implements Listener {
                     if (chestplate == null || chestplate.getType() == Material.AIR) {
                         player.getInventory().setChestplate(currentItem);
                         event.getClickedInventory().setItem(event.getSlot(), null);
+                        if (isBackpack(currentItem)) {
+                            HeadBackpacks.getInstance().getVisualManager().spawnBackpackFor(player, currentItem);
+                        } else {
+                            HeadBackpacks.getInstance().getVisualManager().removeBackpack(player);
+                        }
                         player.updateInventory();
                         return;
                     }
@@ -93,12 +118,26 @@ public class PlayerInventoryListener implements Listener {
             }
         }
 
-        if (isChestplateSlot(event.getSlot()) && cursorIsBackpack) {
-            event.setCancelled(true);
-            ItemStack chestplateItem = player.getInventory().getChestplate();
-            player.getInventory().setChestplate(cursorItem);
-            player.setItemOnCursor(chestplateItem);
-            return;
+        if (isChestplateSlot(event.getSlot())) {
+            if (cursorIsBackpack) {
+                event.setCancelled(true);
+                ItemStack chestplateItem = player.getInventory().getChestplate();
+                player.getInventory().setChestplate(cursorItem);
+                player.setItemOnCursor(chestplateItem);
+                if (isBackpack(cursorItem)) {
+                    HeadBackpacks.getInstance().getVisualManager().spawnBackpackFor(player, cursorItem);
+                } else {
+                    HeadBackpacks.getInstance().getVisualManager().removeBackpack(player);
+                }
+                return;
+            } else if (currentIsBackpack) {
+                Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                    ItemStack newChestplate = player.getInventory().getChestplate();
+                    if (!isBackpack(newChestplate)) {
+                        HeadBackpacks.getInstance().getVisualManager().removeBackpack(player);
+                    }
+                }, 1L);
+            }
         }
 
         if (event.getClick().isRightClick() && event.getCurrentItem() != null) {
@@ -166,13 +205,26 @@ public class PlayerInventoryListener implements Listener {
             return;
         }
 
-        // Allow placing a backpack in the chestplate slot (swap if necessary)
-        if (isChestplateSlot(event.getSlot()) && cursorIsBackpack) {
-            event.setCancelled(true);
-            ItemStack chestplateItem = player.getInventory().getChestplate();
-            player.getInventory().setChestplate(cursorItem);
-            player.setItemOnCursor(chestplateItem);
-            return;
+        if (isChestplateSlot(event.getSlot())) {
+            if (cursorIsBackpack) {
+                event.setCancelled(true);
+                ItemStack chestplateItem = player.getInventory().getChestplate();
+                player.getInventory().setChestplate(cursorItem);
+                player.setItemOnCursor(chestplateItem);
+                if (isBackpack(cursorItem)) {
+                    HeadBackpacks.getInstance().getVisualManager().spawnBackpackFor(player, cursorItem);
+                } else {
+                    HeadBackpacks.getInstance().getVisualManager().removeBackpack(player);
+                }
+                return;
+            } else if (currentIsBackpack) {
+                Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                    ItemStack newChestplate = player.getInventory().getChestplate();
+                    if (!isBackpack(newChestplate)) {
+                        HeadBackpacks.getInstance().getVisualManager().removeBackpack(player);
+                    }
+                }, 1L);
+            }
         }
 
         // Prevent placing a backpack inside another backpack
@@ -189,6 +241,15 @@ public class PlayerInventoryListener implements Listener {
         ItemStack currentItem = event.getCurrentItem();
         boolean currentIsBackpack = isBackpack(currentItem);
 
+        if (isChestplateSlot(event.getSlot()) && currentIsBackpack) {
+            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                ItemStack newChestplate = player.getInventory().getChestplate();
+                if (!isBackpack(newChestplate)) {
+                    HeadBackpacks.getInstance().getVisualManager().removeBackpack(player);
+                }
+            }, 1L);
+        }
+
         if (event.isShiftClick() && currentIsBackpack) {
             // Prevent placing a backpack in the helmet slot
             if (isHelmetSlot(event.getSlot())) {
@@ -199,8 +260,13 @@ public class PlayerInventoryListener implements Listener {
             // Allow placing a backpack in the chestplate slot (swap if necessary)
             if (player.getInventory().getChestplate() == null || player.getInventory().getChestplate().getType() == Material.AIR) {
                 player.getInventory().setChestplate(currentItem);
-                event.getClickedInventory().setItem(event.getSlot(), null);
-                player.updateInventory();
+                    event.getClickedInventory().setItem(event.getSlot(), null);
+                    if (isBackpack(currentItem)) {
+                        HeadBackpacks.getInstance().getVisualManager().spawnBackpackFor(player, currentItem);
+                    } else {
+                        HeadBackpacks.getInstance().getVisualManager().removeBackpack(player);
+                    }
+                    player.updateInventory();
                 return;
             }
 

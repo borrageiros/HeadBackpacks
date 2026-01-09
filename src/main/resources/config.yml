@@ -18,6 +18,7 @@ TexturePermission: 'headbackpacks.texture' #If this field is not filled in, the 
 
 AllowPlaceBackpacks: true #If true, and the user is sneaking, backpacks can be placed in the world and will keep their contents when broken
 AllowWearBackpacks: true #If true, players can wear backpacks on their chest as armor
+EnableVisualBackpacks: false #BETA: If true, backpacks will be rendered visually on players' backs when equipped. This feature is experimental and may have performance impacts.
 
 DefaultTexture: 'https://textures.minecraft.net/texture/bdfcee8306e0434a747710e2bdc2558c5a222e9b693477909f10d6cc220f6764'
 

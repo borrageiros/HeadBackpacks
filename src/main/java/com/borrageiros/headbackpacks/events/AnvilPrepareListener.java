@@ -38,7 +38,7 @@ public class AnvilPrepareListener implements Listener {
         ItemStack result = firstItem.clone();
         ItemMeta resultMeta = result.getItemMeta();
         if (resultMeta == null) {
-            event.setResult(null);
+        event.setResult(null);
             return;
         }
 

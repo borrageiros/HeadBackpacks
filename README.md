@@ -27,6 +27,7 @@
 - 🛡️ **Anti-nesting protection** - Backpacks cannot be placed inside other backpacks
 - 🚫 **Non-stackable** - Each backpack is unique and cannot be stacked
 - 👕 **Wearable as chestplate** - Equip backpacks in the chest armor slot
+- 🎨 **Visual rendering (BETA)** - Optional 3D backpack rendering on players' backs when equipped
 
 ## 🎯 Preview
 
@@ -91,6 +92,14 @@ TexturePermission: 'headbackpacks.texture'
 AllowPlaceBackpacks: true  # Allow placing backpacks as blocks
 AllowWearBackpacks: true   # Allow wearing backpacks in the chest slot
 ```
+
+### Visual Rendering (BETA)
+
+```yaml
+EnableVisualBackpacks: false  # BETA: Render backpacks visually on players' backs when equipped
+```
+
+> ⚠️ **Beta Feature**: Visual rendering is experimental and may have performance impacts. It's disabled by default. When enabled, backpacks will appear as 3D models on players' backs when equipped in the chest slot. The rendering automatically adjusts based on player movement and body direction.
 
 ### Default Texture
 
